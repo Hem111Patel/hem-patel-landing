@@ -3,9 +3,11 @@ import { CalorieRing } from '@/components/today/CalorieRing';
 import { MacroBreakdown } from '@/components/today/MacroBreakdown';
 import { RecoveryScore } from '@/components/today/RecoveryScore';
 import { getTodaySummary } from '@/lib/mock-data';
+import { useFoodStore } from '@/lib/food-store';
 
 export function TodayPage() {
   const summary = getTodaySummary();
+  const { consumed } = useFoodStore();
   const today = format(new Date(), 'EEEE, MMM d');
 
   const waterPct = Math.round((summary.waterMl / summary.waterTargetMl) * 100);
@@ -21,7 +23,7 @@ export function TodayPage() {
       <section className="section">
         <div className="card">
           <CalorieRing
-            consumed={summary.macros.calories}
+            consumed={consumed.calories}
             target={summary.macroTargets.calories}
           />
         </div>
@@ -31,7 +33,7 @@ export function TodayPage() {
         <div className="card">
           <div className="card-title">Macros</div>
           <MacroBreakdown
-            consumed={summary.macros}
+            consumed={consumed}
             targets={summary.macroTargets}
           />
         </div>

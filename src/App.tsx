@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AppShell } from '@/components/layout/AppShell';
+import { FoodStoreProvider } from '@/lib/food-store';
 import { TodayPage } from '@/pages/Today';
 import { FoodPage } from '@/pages/Food';
 import { WorkoutsPage } from '@/pages/Workouts';
@@ -8,15 +9,17 @@ import { InsightsPage } from '@/pages/Insights';
 
 export default function App() {
   return (
-    <AppShell>
-      <Routes>
-        <Route path="/" element={<TodayPage />} />
-        <Route path="/food" element={<FoodPage />} />
-        <Route path="/workouts" element={<WorkoutsPage />} />
-        <Route path="/body" element={<BodyPage />} />
-        <Route path="/insights" element={<InsightsPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </AppShell>
+    <FoodStoreProvider>
+      <AppShell>
+        <Routes>
+          <Route path="/" element={<TodayPage />} />
+          <Route path="/food" element={<FoodPage />} />
+          <Route path="/workouts" element={<WorkoutsPage />} />
+          <Route path="/body" element={<BodyPage />} />
+          <Route path="/insights" element={<InsightsPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AppShell>
+    </FoodStoreProvider>
   );
 }

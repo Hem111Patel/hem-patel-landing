@@ -21,9 +21,13 @@ export interface FoodSearchResult {
   fatPer100g: number;
 }
 
-export async function searchFoods(query: string): Promise<FoodSearchResult[]> {
+export async function searchFoods(
+  query: string,
+  signal?: AbortSignal,
+): Promise<FoodSearchResult[]> {
   const res = await fetch(
     `${BASE_URL}/cgi/search.pl?search_terms=${encodeURIComponent(query)}&search_simple=1&action=process&json=1&page_size=20`,
+    { signal },
   );
   if (!res.ok) throw new Error('Failed to search foods');
   const data = await res.json();

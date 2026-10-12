@@ -31,6 +31,7 @@ export interface FoodEntry {
   fat: number;
   timestamp: string;
   isQuickMeal?: boolean;
+  servingLabel?: string;
 }
 
 export interface QuickMeal {
